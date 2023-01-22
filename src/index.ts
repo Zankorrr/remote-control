@@ -1,4 +1,5 @@
 import { WebSocketServer } from 'ws';
+import drawCircle from './circle';
 import httpServer from "./http_server";
 import mouseDown from './mouseDown';
 import mouseLeft from './mouseLeft';
@@ -42,6 +43,9 @@ wss.on('connection', function connection(ws) {
         break;
       case "draw_rectangle":
         drawRectangle(size, length)
+        break
+      case "draw_circle":
+        drawCircle(size)
         break
       default:
         break;
