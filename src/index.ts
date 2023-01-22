@@ -1,5 +1,10 @@
 import { WebSocketServer } from 'ws';
 import httpServer from "./http_server";
+import mouseDown from './mouseDown';
+import mouseLeft from './mouseLeft';
+import mousePosition from './mousePosition';
+import mouseRight from './mouseRight';
+import mouseUp from './mouseUp';
 import drawSquare from './square';
 
 const HTTP_PORT = 8181;
@@ -15,6 +20,21 @@ wss.on('connection', function connection(ws) {
     const command = data.toString().split(' ')[0]
     const size = +data.toString().split(' ')[1]
     switch (command) {
+      case "mouse_up":
+        mouseUp(size)
+        break
+      case "mouse_right":
+        mouseRight(size)
+        break
+      case "mouse_down":
+        mouseDown(size)
+        break
+      case "mouse_left":
+        mouseLeft(size)
+        break
+      case "mouse_position":
+          mousePosition()
+          break
       case "draw_square":
         drawSquare(size)
         break;
@@ -23,3 +43,13 @@ wss.on('connection', function connection(ws) {
     }
   });
 });
+
+
+// import WebSocket, { createWebSocketStream } from 'ws';
+
+// const ws = new WebSocket('ws://localhost:8080');
+
+// const duplex = createWebSocketStream(ws, { encoding: 'utf8' });
+
+// duplex.pipe(process.stdout);
+// process.stdin.pipe(duplex);
